@@ -1,0 +1,54 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-20.04,macos-10.15]
+    # The type of runner that the job will run on
+    runs-on: ${{ matrix.os }}
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # get OS version
+      - name: Get OS version / Ubuntu
+        if: matrix.os == 'ubuntu-20.04'
+        run: |
+          lsb_release -a
+
+      - name: Get OS version / MacOS
+        if: matrix.os == 'macos-10.15'
+        run: |
+          sw_vers
+
+      # configure
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug
+
+      # build
+      - name: Build
+        run: cmake --build build --config Debug
+
+      # test
+      - name: Test
+        run: |
+          cd build
+          ctest -C Debug -R newTest --output-on-failure --verbose
