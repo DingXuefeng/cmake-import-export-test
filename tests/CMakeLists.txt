@@ -3,7 +3,7 @@ foreach(case_file ${test_cases})
     get_filename_component( case_name ${case_file} NAME_WE )
     set (case_name newTest_${case_name})
     add_executable(${case_name} ${case_file})
-    target_link_libraries(${case_name} Fit::Fit-lib run
+    target_link_libraries(${case_name} run
                           gtest_main)
     add_test(NAME ${case_name}
              COMMAND $<TARGET_FILE:${case_name}>
