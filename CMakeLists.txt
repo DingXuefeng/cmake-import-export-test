@@ -2,15 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(testFit)
 
-### include utilities
-include(FetchContent)
-
-FetchContent_Declare(
-  cmake-cuda 
-  GIT_REPOSITORY https://github.com/DingXuefeng/cmake-cuda-CI-github-actions
-  GIT_TAG        v1.1.2
-  )
-FetchContent_MakeAvailable(cmake-cuda)
+add_subdirectory(extern/DingXuefeng/cmake-cuda-CI-github-actions)
 add_library(Fit::Fit-lib ALIAS Fit-lib)
 if(DEVICE STREQUAL CUDA)
   enable_language(CUDA)

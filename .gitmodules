@@ -1,0 +1,3 @@
+[submodule "extern/DingXuefeng/cmake-cuda-CI-github-actions"]
+	path = extern/DingXuefeng/cmake-cuda-CI-github-actions
+	url = https://github.com/DingXuefeng/cmake-cuda-CI-github-actions.git
