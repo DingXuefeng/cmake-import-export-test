@@ -1,16 +1,11 @@
 #include "executor.h"
-#include "executor2.h"
-#include "newfunctions.h"
+#include "run.h"
 #include <iostream>
 
 int main(void)
 {
-    int sum = calculate();
-    std::cout<<"sum is "<<sum<<std::endl;
-
-    const my_functor &op = my_functor(4);
-    sum = calculate2(op);
-    std::cout<<"sum is "<<sum<<std::endl;
+    std::cout<<"sum is "<<calculate()<<std::endl;
+    std::cout<<"sum is "<<run()<<std::endl;
 
     return 0;
 }
