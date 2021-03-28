@@ -8,7 +8,7 @@ include(FetchContent)
 FetchContent_Declare(
   cmake-cuda 
   GIT_REPOSITORY https://github.com/DingXuefeng/cmake-cuda-CI-github-actions
-  GIT_TAG        main
+  GIT_TAG        v1.1.2
   )
 FetchContent_MakeAvailable(cmake-cuda)
 add_library(Fit::Fit-lib ALIAS Fit-lib)
@@ -16,7 +16,8 @@ if(DEVICE STREQUAL CUDA)
   enable_language(CUDA)
   set(CMAKE_CUDA_SEPARABLE_COMPILATION ON) # effective when created
 else()
-  set_source_files_properties(newfunctions.cu PROPERTIES LANGUAGE CXX)
+  file(GLOB_RECURSE CUDA_FILES *.cu)
+  set_source_files_properties(${CUDA_FILES} PROPERTIES LANGUAGE CXX)
   add_compile_options(-x c++)
 endif()
 
